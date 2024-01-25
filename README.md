@@ -33,7 +33,7 @@ connect node 2 to node 1
 ```C
 graph_connect(&g,node2,node1);
 ```
-free the heap whenever Graph isn't being used
+Always free the heap whenever Graph is not needed
 ```C
 graph_destroy(&g);
 ```
