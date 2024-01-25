@@ -3,6 +3,26 @@
 #include <assert.h>
 #include <stdlib.h>
 
+void test()
+{
+    Graph g = {0};
+    graph_init(&g,100);
+
+    Node *node1 = graph_create_node(&g);
+    Node *node2 = graph_create_node(&g);
+
+    graph_connect(&g,node1,node2);
+    assert(g.nodes_pool_size == 2);
+    assert(g.edges_pool_size == 1);
+
+    assert(graph_node_contains(node1,node2));
+    assert(!graph_node_contains(node2,node1));
+
+    graph_connect(&g,node2,node1);
+    assert(graph_node_contains(node2,node1));
+
+    graph_destroy(&g);
+}
 void test_create_node()
 {
     Graph g = {0};
@@ -81,4 +101,5 @@ int main(void) {
     test_create_node();
     test_graph_connect();
     test_node_equal();
+    test();
 }
