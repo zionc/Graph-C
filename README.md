@@ -15,23 +15,23 @@ Graph g = {0};
 ```
 initialize Graph with a maximum of 100 nodes
 ```C
-    graph_init(&g,100);
+graph_init(&g,100);
 ```
 create a node
 ```C
-    Node *node1 = graph_create_node(&g);
+Node *node1 = graph_create_node(&g);
 ```
 create another node
 ```C
-    Node *node2 = graph_create_node(&g);
+Node *node2 = graph_create_node(&g);
 ```
 connect node 1 to node 2
 ```C
-    graph_connect(&g,node1,node2);
+graph_connect(&g,node1,node2);
 ```
 connect node 2 to node 1
 ```C
-    graph_connect(&g,node2,node1);
+graph_connect(&g,node2,node1);
 ```
 free the heap whenever Graph isn't being used
 ```C
