@@ -4,7 +4,7 @@ This was inspired by an on-going private repo Algo-Visualizer which visualizes a
 
 I figured I'd create this as a base repo and add on to it. New features to be added will be determined by features I'll need from this data structure as my project progresses.
 
-Basic implementation:
+#Basic implementation:
 
 0 initialize Graph struct
 ```C
