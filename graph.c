@@ -5,7 +5,6 @@
 
 void graph_init(Graph *graph,int m_nodes) 
 {
-    
     graph->nodes_pool_size = 0;
     graph->edges_pool_size = 0;
     graph->max_nodes = m_nodes;
@@ -16,18 +15,18 @@ void graph_init(Graph *graph,int m_nodes)
         printf("Could not malloc edges or nodes\n");
         exit(1);
     }
-
 }
 
 void graph_destroy(Graph *graph) 
 {
     for(int i = 0; i < graph->nodes_pool_size; i++) {
         free(graph->nodes_pool[i]->neighbors);
+        if(graph->nodes_pool[i]->args != NULL)
+            free(graph->nodes_pool[i]->args);
         free(graph->nodes_pool[i]);
     }
     free(graph->nodes_pool);
     free(graph->edges_pool);
-    
 }
 
 
@@ -75,7 +74,28 @@ Node *graph_create_node(Graph *graph) {
     
     node->neighbors      = neighbors;
     node->adjacent_size  = 0;
+    node->args           = NULL;
     graph_add_node(graph,node);
+    return node;
+}
+
+// Who needs generics when we have pointers, amiright? TAKE THAT JAVA!
+Node *graph_create_node_args(Graph *graph, void *struct_p,int size_of_struct) 
+{
+    Node *node = graph_create_node(graph);
+
+    char *pack_arguments = malloc(sizeof(char) * size_of_struct);   
+    if(pack_arguments == NULL) {
+        printf("Could not malloc struct arguments\n");
+        exit(1);
+    }
+
+    for(int i = 0; i < size_of_struct; i++) {                      
+        pack_arguments[i] = ((char *)struct_p)[i];
+    }
+
+    node->args = (char*)pack_arguments;         
+    
     return node;
 }
 
