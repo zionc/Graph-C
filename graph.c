@@ -23,6 +23,8 @@ void graph_destroy(Graph *graph)
 {
     for(int i = 0; i < graph->nodes_pool_size; i++) {
         free(graph->nodes_pool[i]->neighbors);
+        if(graph->nodes_pool[i]->args != NULL)
+            free(graph->nodes_pool[i]->args);
         free(graph->nodes_pool[i]);
     }
     free(graph->nodes_pool);
@@ -75,8 +77,25 @@ Node *graph_create_node(Graph *graph) {
     
     node->neighbors      = neighbors;
     node->adjacent_size  = 0;
+    node->args           = NULL;
     graph_add_node(graph,node);
     return node;
+}
+
+Node *graph_create_node_args(Graph *graph, void *struct_p,int size_of_struct) 
+{
+    Node *node = graph_create_node(graph);
+    // node->args = malloc(sizeof(uint64_t));
+
+    // if(node->args == NULL) {
+    //     printf("Could not malloc for arguments\n");
+    //     exit(1);
+    // }
+
+    node->args = (uint64_t*)struct_p;         // upper bound of 64 bit word size
+    
+    return node;
+    
 }
 
 

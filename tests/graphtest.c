@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
-
+#include <string.h>
 void test()
 {
     Graph g = {0};
@@ -93,13 +93,54 @@ void test_node_equal()
 
     graph_destroy(&g);
     printf("test_node_equal: Passed\n");
-}  
+} 
+
+void test_args() 
+{
+    char *names[] = {"Zion","Nia","Batman","Robin","Casper"};
+    typedef struct Args
+    {
+        int id;
+        char *name;
+    } Args;
 
 
+    Graph g = {0};
+    graph_init(&g,100);
+
+    for(int i = 0; i < 100; i++) {
+
+        Args *arg = malloc(sizeof(Args*));
+        arg->id = i;
+        arg->name = names[i%5];
+
+        graph_create_node_args(&g,(void*)arg,sizeof(arg));
+    }
+    
+    // Test that names
+    for(int i = 0; i < 100; i++) {
+        Node *node = g.nodes_pool[i];
+        Args *arg = (Args*)node->args;
+        if(i % 5 == 0)
+            assert(strcmp(arg->name,"Zion") == 0);
+        if(i % 5 == 1)
+            assert(strcmp(arg->name,"Nia") == 0);
+        if(i % 5 == 2)
+            assert(strcmp(arg->name,"Batman") == 0);
+        if(i % 5 == 3)
+            assert(strcmp(arg->name,"Robin") == 0);
+        if(i % 5 == 4)
+            assert(strcmp(arg->name,"Casper") == 0);
+    }
+    graph_destroy(&g);
+
+    printf("Test args: Passed\n");
+}
 
 int main(void) {
     test_create_node();
     test_graph_connect();
     test_node_equal();
     test();
+    test_args();
 }

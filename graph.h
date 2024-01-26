@@ -1,3 +1,4 @@
+#include <stdint.h>
 #ifndef GRAPH_H
 #define GRAPH_H
 
@@ -5,6 +6,7 @@ typedef struct Node
 {
     struct Node *neighbors;
     int adjacent_size;
+    uint64_t *args;
 }Node;
 
 typedef struct Edge
@@ -21,6 +23,7 @@ typedef struct Graph
     int max_nodes, max_edges;
 } Graph;
 
+
 // Create edge between from and to
 void graph_connect(Graph *graph,Node* from, Node* to);
 
@@ -33,8 +36,11 @@ void graph_init(Graph *graph,int max_nodes);
 // Free the heap from the graph
 void graph_destroy(Graph *graph);
 
-// Create node with default adjacency size
+// Create node 
 Node *graph_create_node(Graph *graph);
+
+// Create node with struct pointer, struct_p
+Node *graph_create_node_args(Graph *graph, void *struct_p,int size_of_struct);
 
 // Get the adjacent list of Nodes
 Node* graph_node_adjacents(Graph *graph,Node* node);
