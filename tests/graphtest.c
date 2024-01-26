@@ -109,29 +109,29 @@ void test_args()
     graph_init(&g,100);
 
     for(int i = 0; i < 100; i++) {
-
-        Args *arg = malloc(sizeof(Args*));
-        arg->id = i;
-        arg->name = names[i%5];
-
-        graph_create_node_args(&g,(void*)arg,sizeof(arg));
+        Args arg = {0};
+        arg.id = i;
+        arg.name = names[i%5];
+        graph_create_node_args(&g,(void*)&arg,sizeof(arg));
     }
-    
-    // Test that names
+
+    // Test id's and names correspond with correct name
     for(int i = 0; i < 100; i++) {
         Node *node = g.nodes_pool[i];
         Args *arg = (Args*)node->args;
-        if(i % 5 == 0)
+        if((arg->id % 5) == 0)
             assert(strcmp(arg->name,"Zion") == 0);
-        if(i % 5 == 1)
+        if((arg->id % 5) == 1)
             assert(strcmp(arg->name,"Nia") == 0);
-        if(i % 5 == 2)
+        if((arg->id % 5) == 2)
             assert(strcmp(arg->name,"Batman") == 0);
-        if(i % 5 == 3)
+        if((arg->id % 5) == 3)
             assert(strcmp(arg->name,"Robin") == 0);
-        if(i % 5 == 4)
+        if((arg->id % 5) == 4)
             assert(strcmp(arg->name,"Casper") == 0);
     }
+
+
     graph_destroy(&g);
 
     printf("Test args: Passed\n");

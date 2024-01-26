@@ -6,7 +6,7 @@ typedef struct Node
 {
     struct Node *neighbors;
     int adjacent_size;
-    uint64_t *args;
+    char *args;
 }Node;
 
 typedef struct Edge
