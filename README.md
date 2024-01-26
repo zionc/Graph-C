@@ -9,31 +9,15 @@ You can find examples of implementation in tests.
 
 # Basic implementation:
 
-0 initialize Graph struct
 ```C
 Graph g = {0};
-```
-initialize Graph with a maximum of 100 nodes
-```C
-graph_init(&g,100);
-```
-create a node
-```C
+graph_init(&g,100); // entry point
+
 Node *node1 = graph_create_node(&g);
-```
-create another node
-```C
 Node *node2 = graph_create_node(&g);
-```
-connect node 1 to node 2
-```C
-graph_connect(&g,node1,node2);
-```
-connect node 2 to node 1
-```C
+
+graph_connect(&g,node1,node2); 
 graph_connect(&g,node2,node1);
-```
-Always free the heap whenever Graph is not needed
-```C
-graph_destroy(&g);
+
+graph_destroy(&g);  // always free the heap
 ```
