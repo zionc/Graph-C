@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
 void graph_init(Graph *graph,int m_nodes) 
 {
     graph->nodes_pool_size = 0;
@@ -52,7 +51,8 @@ static Edge graph_create_edge_weight(Graph *graph,Node* from, Node* to, int weig
 }
 
 
-Node *graph_create_node(Graph *graph) {
+Node *graph_create_node(Graph *graph) 
+{
     if(graph->nodes_pool_size >= graph->max_nodes)
     {
         printf("Attempted to add new node when maximum number of nodes met, returning\n");
@@ -141,7 +141,8 @@ Node* graph_node_adjacents(Graph *graph,Node* node)
     return 0;
 }
 
-int graph_node_equals(Node* node_1, Node* node_2) {
+int graph_node_equals(Node* node_1, Node* node_2) 
+{
     if (node_1->neighbors == node_2->neighbors && 
             node_1->adjacent_size == node_2->adjacent_size) return 1;
     return 0;
