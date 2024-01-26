@@ -51,7 +51,6 @@ void test_graph_connect()
     assert(node2->adjacent_size == 0);
     assert(node3->adjacent_size == 0);
 
-
     graph_connect(&g,node1,node2);
     graph_connect(&g,node1,node3);
     assert(node1->adjacent_size == 2);
@@ -76,7 +75,6 @@ void test_graph_connect()
     
     graph_destroy(&g);
     printf("test_graph_connect: Passed\n");
-    
 }
 
 void test_node_equal()
@@ -104,7 +102,6 @@ void test_args()
         char *name;
     } Args;
 
-
     Graph g = {0};
     graph_init(&g,100);
 
@@ -130,10 +127,7 @@ void test_args()
         if((arg->id % 5) == 4)
             assert(strcmp(arg->name,"Casper") == 0);
     }
-
-
     graph_destroy(&g);
-
     printf("Test args: Passed\n");
 }
 
