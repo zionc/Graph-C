@@ -22,22 +22,24 @@ graph_connect(&g,node2,node1);
 graph_destroy(&g);  // always free the heap
 ```
 
-## Custom args w/o changing Node struct
+## Accepts Generic arguments
 ```C
 typedef struct Args{
   int id;
   char *name;
 } Args;
-
 char *names[] = {"Naruto","Sasuke","Gojo","Killua","Gon"};
+
 Graph g = {0};
 graph_init(&g,100);
 
-for(int i = 0; i < 100; i++) {
+// You can create specific arguments for specific nodes,
+// while not touching the Node struct
+for(int i = 0; i < 100; i++) {              
     Args arg = {0};
     arg.id = i;
     arg.name = names[i%5];
-    graph_create_node_args(&g,(void*)&arg,sizeof(arg));
+    graph_create_node_args(&g,(void*)&arg,sizeof(arg));   //needs void pointer to struct and size of struct
 }
 
 graph_destroy(&g);
