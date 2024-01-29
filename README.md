@@ -1,4 +1,4 @@
-## Keep expectations low
+## Graph Template
 Very basic implementation of a Graph using structs. 
 
 This was inspired by an on-going private repo Algo-Visualizer which visualizes algorithms using graphs in pure C.
@@ -24,10 +24,13 @@ graph_destroy(&g);  // always free the heap
 
 ## Accepts Generic arguments
 ```C
+/* Create struct for additional arguments */
 typedef struct Args{
   int id;
   char *name;
 } Args;
+
+/* Sample data */
 char *names[] = {"Naruto","Sasuke","Gojo","Killua","Gon"};
 
 Graph g = {0};
@@ -41,6 +44,10 @@ for(int i = 0; i < 100; i++) {
     arg.name = names[i%5];
     graph_create_node_args(&g,(void*)&arg,sizeof(arg));   //needs void pointer to struct and size of struct
 }
+
+/* Cast void back to struct to access members */
+Node *node = g.nodes_pool[0];
+Args *arg = (Args*)node->args;
 
 graph_destroy(&g);
 ```
