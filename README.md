@@ -36,13 +36,15 @@ char *names[] = {"Naruto","Sasuke","Gojo","Killua","Gon"};
 Graph g = {0};
 graph_init(&g,100);
 
-// You can create specific arguments for specific nodes,
-// while not touching the Node struct
+/* Provide additional members to Node without directly adding them
+   to Node struct */
 for(int i = 0; i < 100; i++) {              
     Args arg = {0};
     arg.id   = i;
     arg.name = names[i%5];
-    graph_create_node_args(&g,(void*)&arg,sizeof(arg));   //needs void pointer to struct and size of struct
+
+    /* Cast struct to void pointer and also pass in size of struct */
+    graph_create_node_args(&g,(void*)&arg,sizeof(arg));   
 }
 
 /* Cast void pointer to struct pointer to access members */
