@@ -45,9 +45,11 @@ for(int i = 0; i < 100; i++) {
     graph_create_node_args(&g,(void*)&arg,sizeof(arg));   //needs void pointer to struct and size of struct
 }
 
-/* Cast void back to struct to access members */
-Node *node = g.nodes_pool[0];
-Args *arg = (Args*)node->args;
+/* Cast void pointer to struct pointer to access members */
+Node *node      = g.nodes_pool[0];
+Args *arg       = (Args*)node->args;
+char *node_name = arg->name;
+char *node_id   = arg->id;
 
 graph_destroy(&g);
 ```
