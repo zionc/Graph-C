@@ -40,7 +40,7 @@ graph_init(&g,100);
 // while not touching the Node struct
 for(int i = 0; i < 100; i++) {              
     Args arg = {0};
-    arg.id = i;
+    arg.id   = i;
     arg.name = names[i%5];
     graph_create_node_args(&g,(void*)&arg,sizeof(arg));   //needs void pointer to struct and size of struct
 }
